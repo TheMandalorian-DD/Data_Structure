@@ -2,9 +2,6 @@
 #define _BIBLIOLC_H_
 
 
-
-
-
 typedef struct livre {
 	int num ;
 	char * titre ;
