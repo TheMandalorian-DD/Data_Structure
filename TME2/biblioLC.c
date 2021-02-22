@@ -80,12 +80,6 @@ void inserer_en_tete(Biblio* b,int num,char* titre,char* auteur){
 
 	if (livre=creer_livre(num,titre,auteur) == NULL) return;
 
-	if (b -> L==NULL){
-
-		b -> L = livre;
-
-	}
-
 	livre -> suiv = b -> L;
 
 	b -> L = livre;
@@ -190,15 +184,15 @@ Biblio *supprimer_livre(Biblio *b, int num, char *titre, char *auteur){
 
 Biblio *fusion(Biblio *b1, Biblio *b2){
 
+	if (b1 -> L == NULL) return b2;
+
+	if (b2 -> L == NULL) return b1;
+
 	Biblio *bi = creer_biblio();
 
 	Livre *livre1 = b1 -> L;
 
 	Livre *livre2 = b2 -> L;
-	
-	if (livre1==NULL) return b2;
-
-	if (livre2==NULL) return b1;
 
 	Livre *tmp = livre1;
 	
