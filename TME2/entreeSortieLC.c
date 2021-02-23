@@ -1,9 +1,11 @@
 #include "entreeSortieLC.h"
-#include "biblioLC.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "biblioLC.h"
 
 Biblio* charger_n_entrees(char* nomfic, int n){
 
@@ -16,12 +18,12 @@ Biblio* charger_n_entrees(char* nomfic, int n){
 		exit(1);
 	}
 
-	char ligne[100];
-	char titre[50];
-	char auteur[50];
+	char ligne[256];
+	char titre[256];
+	char auteur[256];
 	int num, cpt=0;
 
-	while(fgets(ligne,100,f)){
+	while(fgets(ligne,256,f)){
 
 		if (cpt==n) break;
 

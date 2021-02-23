@@ -1,5 +1,4 @@
 #include "biblioLC.h"
-#include "entreeSortieLC.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,7 +52,7 @@ Biblio* creer_biblio(){
 
 	if (b==NULL) return NULL;
 
-	b -> L = creer_livre(0,"","");
+	b -> L = NULL;
 
 	return b;
 }
@@ -78,7 +77,7 @@ void inserer_en_tete(Biblio* b,int num,char* titre,char* auteur){
 
 	Livre* livre;
 
-	if (livre=creer_livre(num,titre,auteur) == NULL) return;
+	if ((livre=creer_livre(num,titre,auteur)) == NULL) return;
 
 	livre -> suiv = b -> L;
 
@@ -98,7 +97,7 @@ void afficher_biblio(Biblio *b){
 
 	Livre *livre = b -> L;
 
-	for(; livre && strcmp(livre->auteur,"")>0; livre = livre -> suiv){
+	for(; livre /*&& strcmp(livre->auteur,"")>0*/; livre = livre -> suiv){
 
 		afficher_livre(livre);
 	}
@@ -182,46 +181,43 @@ Biblio *supprimer_livre(Biblio *b, int num, char *titre, char *auteur){
     return b;
 }
 
-Biblio *fusion(Biblio *b1, Biblio *b2){
+void fusion(Biblio* b1, Biblio* b2) {
 
-	if (b1 -> L == NULL) return b2;
+  Livre** lp = &b2->L;
 
-	if (b2 -> L == NULL) return b1;
+  Livre* curr;
 
-	Biblio *bi = creer_biblio();
+  for(; (curr = *lp); lp = &curr->suiv);
+    
+  *lp = b1->L;
 
-	Livre *livre1 = b1 -> L;
+  b1->L = b2->L;
 
-	Livre *livre2 = b2 -> L;
+  b2->L = NULL;
 
-	Livre *tmp = livre1;
-	
-	for(;tmp ;tmp = tmp -> suiv);
-	
-	tmp -> suiv = livre2;
+  liberer_biblio(b2);
+}
 
-	bi -> L = livre1;
+Biblio *recherche_exemplaires(Biblio *b){
 
+	Biblio *bi;
+
+	if((bi=creer_biblio())==NULL) return NULL;
+
+	for(Livre *livre1 = b -> L; livre1; livre1 = livre1 -> suiv){
+
+		for(Livre *livre2 = b -> L; livre2; livre2 = livre2 -> suiv){
+
+			if (livre1 != livre2 && strcmp(livre1->titre,livre2->titre)==0 && strcmp(livre1->auteur,livre2->auteur)==0){
+
+				inserer_en_tete(bi,livre2->num,livre2->titre,livre2->auteur);
+			}
+		}
+	}
 	return bi;
-	
 }
 
 
-int main(){
 
-	Biblio *b=charger_n_entrees("GdeBiblio.txt",5);
-
-	Biblio *b1 = charger_n_entrees("GdeBiblio.txt",9);
-
-	//b=supprimer_livre(b,4,"FWKHOPKMCOQHNWNKUE", "hsqmgbbuqcl");
- 
-    //afficher_biblio(b);
-
-	Biblio *bt = fusion_biblio(b,b1);
-
-	afficher_biblio(bt);
-
-    //enregistrer_biblio(b,"bibi.txt");
-}
 
 
