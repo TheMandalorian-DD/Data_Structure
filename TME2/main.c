@@ -31,7 +31,7 @@ int main(int argc, char** argv){
 
         printf("usage: %s file line_number\n",argv[0]);
         
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 
     Biblio *b = charger_n_entrees(argv[1],atoi(argv[2]));
@@ -46,7 +46,7 @@ int main(int argc, char** argv){
 
     	livre = NULL;
 
-    	printf("Que voulez-vous faire ? ...\n");
+    	printf("\nQue voulez-vous faire ? ...\n");
 
     	sleep(1);
 
@@ -58,7 +58,7 @@ int main(int argc, char** argv){
 
     		case 1:
 
-    			printf("Affichage\n");
+    			printf("\nAffichage\n");
 
     			afficher_biblio(b);
 
@@ -66,7 +66,7 @@ int main(int argc, char** argv){
 
     		case 2:
 
-    			printf("Veuillez entrer le numero, le titre et l'auteur de l'ouvrage.\n");
+    			printf("\nVeuillez entrer le numero, le titre et l'auteur de l'ouvrage.\n");
 
     			/* On suppose que le titre et l’auteur ne contiennent pas d’espace*/
 
@@ -80,11 +80,11 @@ int main(int argc, char** argv){
 
     				inserer_en_tete(b,num,titre,auteur);
 
-    				printf("Ajout fait.\n");
+    				printf("\nAjout fait.\n");
 
     			} else {
 
-    				printf("Erreur format\n");
+    				printf("\nErreur format\n");
 
     			}
 
@@ -92,7 +92,7 @@ int main(int argc, char** argv){
 
     		case 3:
 
-    			printf("Veuillez enntrer le numero de l'ouvrage.\n");
+    			printf("\nVeuillez enntrer le numero de l'ouvrage.\n");
 
     			if (scanf("%d",&num)==1){
 
@@ -100,8 +100,8 @@ int main(int argc, char** argv){
 
     			}
 
-    			if (livre==NULL) printf("Ouvrage non trouvé\n");
-    			else printf("Ouvrage trouvé\n");
+    			if (livre==NULL) printf("\nOuvrage non trouvé\n");
+    			else printf("\nOuvrage trouvé\n");
 
     			afficher_livre(livre);
 
@@ -109,7 +109,7 @@ int main(int argc, char** argv){
 
     		case 4:
 
-    			printf("Veuillez enntrer le titre de l'ouvrage.\n");
+    			printf("\nVeuillez enntrer le titre de l'ouvrage.\n");
 
     			if (scanf("%s",titre)==1){
 
@@ -117,8 +117,8 @@ int main(int argc, char** argv){
 
     			}
 
-    			if (livre==NULL) printf("Ouvrage non trouvé\n");
-    			else printf("Ouvrage trouvé\n");
+    			if (livre==NULL) printf("\nOuvrage non trouvé\n");
+    			else printf("\nOuvrage trouvé\n");
 
     			afficher_livre(livre);
 
@@ -126,7 +126,7 @@ int main(int argc, char** argv){
 
     		case 5:
 
-    			printf("Veuillez entrer le nom de l'auteur.\n");
+    			printf("\nVeuillez entrer le nom de l'auteur.\n");
 
     			if (scanf("%s",auteur)==1){
 
@@ -134,8 +134,8 @@ int main(int argc, char** argv){
 
     			}
 
-    			if (bi->L==NULL) printf("Aucun ouvrage trouvé de cet auteur\n");
-    			else printf("Ouvrages trouvés\n");
+    			if (bi->L==NULL) printf("\nAucun ouvrage trouvé de cet auteur\n");
+    			else printf("\nOuvrages trouvés\n");
 
     			afficher_biblio(bi);
 
@@ -145,7 +145,7 @@ int main(int argc, char** argv){
 
     		case 6:
 
-    			printf("Veuillez entrer le numero, le titre et l'auteur de l'ouvrage.\n");
+    			printf("\nVeuillez entrer le numero, le titre et l'auteur de l'ouvrage.\n");
 
     			/* On suppose que le titre et l’auteur ne contiennent pas d’espace*/
 
@@ -153,11 +153,11 @@ int main(int argc, char** argv){
 
     				b = supprimer_livre(b,num,titre,auteur);
 
-    				printf("suppression fait.\n");
+    				printf("\nsuppression fait.\n");
 
     			} else {
 
-    				printf("Erreur format\n");
+    				printf("\nErreur format\n");
 
     			}
     			break;
@@ -166,8 +166,8 @@ int main(int argc, char** argv){
 
     			bi = recherche_exemplaires(b);
 
-    			if (bi->L==NULL) printf("Aucun exemplaires trouvés\n");
-    			else printf("Exemplaires trouvés\n");
+    			if (bi->L==NULL) printf("\nAucun exemplaires trouvés\n");
+    			else printf("\nExemplaires trouvés\n");
 
     			afficher_biblio(bi);
 
@@ -177,11 +177,12 @@ int main(int argc, char** argv){
 
 
     	}
+    	
     } while (rep != 0);
 
     liberer_biblio(b);
 
-    printf("Au revoir !\n");
+    printf("\nAu revoir !\n");
 
     return 0;
 }

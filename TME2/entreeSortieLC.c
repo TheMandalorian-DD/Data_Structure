@@ -14,8 +14,10 @@ Biblio* charger_n_entrees(char* nomfic, int n){
 	FILE *f = fopen(nomfic,"r");
 
 	if (f==NULL){
-		printf("Erreur lors de l'ouverture du fichier\n");
-		exit(1);
+
+		fprintf(stderr,"\nErreur: Impossible de lire le fichier %s\n",nomfic);
+
+		exit(EXIT_FAILURE);
 	}
 
 	char ligne[256];
@@ -23,12 +25,12 @@ Biblio* charger_n_entrees(char* nomfic, int n){
 	char auteur[256];
 	int num, cpt=0;
 
-	while(fgets(ligne,256,f)){
-
-		if (cpt==n) break;
+	while(fgets(ligne,256,f) && cpt != n){
 
 		sscanf(ligne, "%d %s %s",&num,titre,auteur);
+
 		inserer_en_tete(b,num,titre,auteur);
+
 		cpt++;
 	}
 
@@ -44,8 +46,10 @@ void enregistrer_biblio(Biblio *b, char* nomfic){
 	FILE *f = fopen(nomfic,"w");
 
 	if (f==NULL){
-		printf("Erreur lors de l'ouverture du fichier\n");
-		exit(1);
+
+		fprintf(stderr,"\nErreur: Impossible d'ouvrir le fichier %s\n",nomfic);
+
+		exit(EXIT_FAILURE);
 	}
 
 	Livre* livre = b -> L;
@@ -55,6 +59,7 @@ void enregistrer_biblio(Biblio *b, char* nomfic){
 		fprintf(f,"%d %s %s\n",livre -> num, livre -> titre, livre -> auteur);
 
 	}
+	fclose(f);
 
 }
 
