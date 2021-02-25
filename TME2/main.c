@@ -29,9 +29,9 @@ int main(int argc, char** argv){
 
     if (argc < 3){
 
-        printf("usage: %s file line_number\n",argv[0]);
+        printf("usage: %s file number_of_line\n",argv[0]);
         
-        exit(EXIT_FAILURE);
+        return EXIT_FAILURE;
     }
 
     Biblio *b = charger_n_entrees(argv[1],atoi(argv[2]));
@@ -96,14 +96,13 @@ int main(int argc, char** argv){
 
     			if (scanf("%d",&num)==1){
 
-    				livre = recherche_ouvrage_num(b,num);
+    				if ((livre = recherche_ouvrage_num(b,num))==NULL) printf("\nOuvrage non trouvé\n");
+                    else afficher_livre(livre);
 
-    			}
+    			} else {
 
-    			if (livre==NULL) printf("\nOuvrage non trouvé\n");
-    			else printf("\nOuvrage trouvé\n");
-
-    			afficher_livre(livre);
+                    printf("\nErreur format\n");
+                }
 
     			break;
 
@@ -113,14 +112,13 @@ int main(int argc, char** argv){
 
     			if (scanf("%s",titre)==1){
 
-    				livre = recherche_ouvrage_titre(b,titre);
+    				if ((livre = recherche_ouvrage_titre(b,titre))==NULL) printf("\nOuvrage non trouvé\n");
+                    else afficher_livre(livre);
 
-    			}
+                } else {
 
-    			if (livre==NULL) printf("\nOuvrage non trouvé\n");
-    			else printf("\nOuvrage trouvé\n");
-
-    			afficher_livre(livre);
+                    printf("\nErreur format\n");
+                }
 
     			break;
 
@@ -130,14 +128,14 @@ int main(int argc, char** argv){
 
     			if (scanf("%s",auteur)==1){
 
-    				bi = recherche_meme_auteur(b,auteur);
+    				if ((bi = recherche_meme_auteur(b,auteur))->L == NULL) printf("\nAucun ouvrage trouvé de cet auteur\n");
+                    else afficher_biblio(bi);
 
-    			}
+    			} else {
 
-    			if (bi->L==NULL) printf("\nAucun ouvrage trouvé de cet auteur\n");
-    			else printf("\nOuvrages trouvés\n");
+                    printf("\nErreur format\n");
 
-    			afficher_biblio(bi);
+                }
 
     			liberer_biblio(bi);
 
@@ -164,9 +162,9 @@ int main(int argc, char** argv){
 
     		case 7:
 
-    			bi = recherche_exemplaires(b);
+    			
 
-    			if (bi->L==NULL) printf("\nAucun exemplaires trouvés\n");
+    			if ((bi = recherche_exemplaires(b))->L==NULL) printf("\nAucun exemplaires trouvés\n");
     			else printf("\nExemplaires trouvés\n");
 
     			afficher_biblio(bi);
@@ -177,7 +175,7 @@ int main(int argc, char** argv){
 
 
     	}
-    	
+
     } while (rep != 0);
 
     liberer_biblio(b);
