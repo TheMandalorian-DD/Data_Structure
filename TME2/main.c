@@ -36,23 +36,35 @@ int main(int argc, char** argv){
 
     Biblio *b = charger_n_entrees(argv[1],atoi(argv[2]));
 
-    Biblio *bi = NULL;
+    Biblio *bi;
 
     Livre *livre;
 
-    int rep;
+	int num;
+
+    char titre[256];
+
+    char auteur[256];
+
+    char ligne[256];
+
+	int rep;
 
     do{
 
-    	livre = NULL;
+		bi = NULL, livre = NULL;
 
     	printf("\nQue voulez-vous faire ? ...\n");
 
-    	sleep(1);
+    	/* sleep(1); */
 
     	menu();
 
-    	scanf("%d",&rep);
+    	fgets(ligne,256,stdin);
+
+		sscanf(ligne,"%d",&rep);
+
+		/* rep = strtod(r, NULL); //*/
 
     	switch(rep){
 
@@ -70,13 +82,9 @@ int main(int argc, char** argv){
 
     			/* On suppose que le titre et l’auteur ne contiennent pas d’espace*/
 
-    			int num;
+				fgets(ligne,256,stdin);
 
-    			char titre[256];
-
-    			char auteur[256];
-
-    			if (scanf("%d %s %s",&num,titre,auteur)==3) {
+    			if (sscanf(ligne,"%d %s %s",&num,titre,auteur)==3) {
 
     				inserer_en_tete(b,num,titre,auteur);
 
@@ -92,9 +100,11 @@ int main(int argc, char** argv){
 
     		case 3:
 
-    			printf("\nVeuillez enntrer le numero de l'ouvrage.\n");
+    			printf("\nVeuillez entrer le numero de l'ouvrage.\n");
 
-    			if (scanf("%d",&num)==1){
+				fgets(ligne,256,stdin);
+
+    			if (sscanf(ligne,"%d",&num)==1){
 
     				if ((livre = recherche_ouvrage_num(b,num))==NULL) printf("\nOuvrage non trouvé\n");
                     else afficher_livre(livre);
@@ -110,7 +120,9 @@ int main(int argc, char** argv){
 
     			printf("\nVeuillez enntrer le titre de l'ouvrage.\n");
 
-    			if (scanf("%s",titre)==1){
+				fgets(ligne,256,stdin);
+
+    			if (sscanf(ligne,"%s",titre)==1){
 
     				if ((livre = recherche_ouvrage_titre(b,titre))==NULL) printf("\nOuvrage non trouvé\n");
                     else afficher_livre(livre);
@@ -126,7 +138,9 @@ int main(int argc, char** argv){
 
     			printf("\nVeuillez entrer le nom de l'auteur.\n");
 
-    			if (scanf("%s",auteur)==1){
+				fgets(ligne,256,stdin);
+
+    			if (sscanf(ligne,"%s",auteur)==1){
 
     				if ((bi = recherche_meme_auteur(b,auteur))->L == NULL) printf("\nAucun ouvrage trouvé de cet auteur\n");
                     else afficher_biblio(bi);
@@ -147,7 +161,9 @@ int main(int argc, char** argv){
 
     			/* On suppose que le titre et l’auteur ne contiennent pas d’espace*/
 
-    			if (scanf("%d %s %s",&num,titre,auteur)==3) {
+				fgets(ligne,256,stdin);
+
+    			if (sscanf(ligne,"%d %s %s",&num,titre,auteur)==3) {
 
     				b = supprimer_livre(b,num,titre,auteur);
 
@@ -158,16 +174,13 @@ int main(int argc, char** argv){
     				printf("\nErreur format\n");
 
     			}
+
     			break;
 
     		case 7:
 
-    			
-
     			if ((bi = recherche_exemplaires(b))->L==NULL) printf("\nAucun exemplaires trouvés\n");
-    			else printf("\nExemplaires trouvés\n");
-
-    			afficher_biblio(bi);
+    			else afficher_biblio(bi);
 
     			liberer_biblio(bi);
 

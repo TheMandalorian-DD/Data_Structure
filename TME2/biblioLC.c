@@ -97,6 +97,13 @@ void afficher_biblio(Biblio *b){
 
 	Livre *livre = b -> L;
 
+	if(livre==NULL){
+
+		printf("Cette bibliotheque ne contient pas de livre !\n");
+
+		return;
+	}
+
 	for(; livre /*&& strcmp(livre->auteur,"")>0*/; livre = livre -> suiv){
 
 		afficher_livre(livre);
