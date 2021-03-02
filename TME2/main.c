@@ -81,7 +81,7 @@ int main(int argc, char** argv){
     			printf("\nVeuillez entrer le numero, le titre et l'auteur de l'ouvrage.\n");
 
     			/* On suppose que le titre et l’auteur ne contiennent pas d’espace*/
-
+				
 				fgets(ligne,256,stdin);
 
     			if (sscanf(ligne,"%d %s %s",&num,titre,auteur)==3) {
@@ -101,7 +101,7 @@ int main(int argc, char** argv){
     		case 3:
 
     			printf("\nVeuillez entrer le numero de l'ouvrage.\n");
-
+				
 				fgets(ligne,256,stdin);
 
     			if (sscanf(ligne,"%d",&num)==1){
@@ -119,7 +119,7 @@ int main(int argc, char** argv){
     		case 4:
 
     			printf("\nVeuillez enntrer le titre de l'ouvrage.\n");
-
+				
 				fgets(ligne,256,stdin);
 
     			if (sscanf(ligne,"%s",titre)==1){
@@ -137,7 +137,7 @@ int main(int argc, char** argv){
     		case 5:
 
     			printf("\nVeuillez entrer le nom de l'auteur.\n");
-
+				
 				fgets(ligne,256,stdin);
 
     			if (sscanf(ligne,"%s",auteur)==1){
@@ -160,7 +160,7 @@ int main(int argc, char** argv){
     			printf("\nVeuillez entrer le numero, le titre et l'auteur de l'ouvrage.\n");
 
     			/* On suppose que le titre et l’auteur ne contiennent pas d’espace*/
-
+				
 				fgets(ligne,256,stdin);
 
     			if (sscanf(ligne,"%d %s %s",&num,titre,auteur)==3) {
