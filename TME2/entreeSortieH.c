@@ -54,7 +54,9 @@ void enregistrer_biblioH(BiblioH *bh, char* nomfic){
 
     LivreH* lh;
 
-	for(int i = 0; i < bh->m; lh = bh->T[i++]){
+	for(int i = 0; i < bh->m; i++){
+
+        lh = bh -> T[i];
 
         if (lh!=NULL){
             

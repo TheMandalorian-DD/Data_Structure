@@ -20,9 +20,9 @@ void menu(){
 
   puts("6.suppression d’un ouvrage");
 
-  puts("7.recherche de tous les ouvrages avec plusieurs exemplaires");
+  puts("7.recherche de tous les ouvrages avec plusieurs exemplaires");*/
 
-  puts("press 0 to exit...");*/
+  puts("press 0 to exit...");
 }
 
 int main(int argc, char** argv){

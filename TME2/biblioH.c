@@ -126,9 +126,9 @@ void afficher_livreH(LivreH* lh){
 
     if (lh==NULL) return;
 
-    for(LivreH* l = lh; l; l = l -> suivant){
+    for(; lh; lh = lh -> suivant){
 
-        printf("num : %d, titre : %s, auteur : %s\n",l->num,l->titre,l->auteur);
+        printf("num : %d, titre : %s, auteur : %s\n",lh->num,lh->titre,lh->auteur);
     }
 }
 
@@ -138,15 +138,7 @@ void afficher_biblioH(BiblioH* bh){
 
     if (bh->nE == 0) return;
     
-    LivreH* lh;
-    
-    for (int i = 0; i < bh->m; lh = bh->T[i++]) afficher_livreH(lh);
-    
-}
+    for (int i = 0; i < bh->m; i++) afficher_livreH(bh->T[i]);
 
-int main(void){
-    LivreH* l = creer_livreH(1,"abc","def");
-    l->suivant = creer_livreH(2,"fokods","idjfi");
-    afficher_livreH(l);
 }
 
