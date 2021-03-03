@@ -25,9 +25,13 @@ void liberer_livreH(LivreH** lh);
 
 BiblioH* creer_biblioH(int m);
 
-void liberer_biblioH(BiblioH* b);
+void liberer_biblioH(BiblioH* bh);
 
 void inserer(BiblioH* b,int num,char* titre,char* auteur);
+
+void afficher_livreH(LivreH* lh);
+
+void afficher_biblioH(BiblioH* bh);
 
 
 #endif

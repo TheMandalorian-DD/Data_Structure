@@ -18,7 +18,10 @@ int fonctionClef(char* auteur){
     return somme;
 }
 
-int fonctionHachage(int cle, int m){}
+int fonctionHachage(int cle, int m){
+
+    return (int)(m * ((double)cle * A - (int)(cle * A)));
+}
 
 LivreH* creer_livreH(int num,char* titre,char* auteur){
 
@@ -70,53 +73,80 @@ void liberer_livreH(LivreH** lh){
 
 BiblioH* creer_biblioH(int m){
 
-    BiblioH *b = malloc(sizeof(BiblioH));
+    BiblioH *bh = malloc(sizeof(BiblioH));
 
-    if (b==NULL) return NULL;
+    if (bh==NULL) return NULL;
 
-    b -> nE = 0;
+    bh -> nE = 0;
 
-    b -> m = m;
+    bh -> m = m;
 
-    b -> T = (LivreH**)malloc(sizeof(LivreH*) * b->m);
+    bh -> T = (LivreH**)malloc(sizeof(LivreH*) * bh->m);
 
-    if (b->T==NULL){
+    if (bh->T==NULL){
 
-        free(b);
+        free(bh);
 
         return NULL;
     }
+    /* Initialisation des tableaux */
+    memset(bh->T, 0, sizeof(LivreH*) * bh->m);
 
-    return b;
+    return bh;
 }
 
-void liberer_biblioH(BiblioH* b){
+void liberer_biblioH(BiblioH* bh){
 
-    LivreH** tab = b -> T;
+    LivreH** tab = bh -> T;
 
-    for(int i = 0; i < (b->m); i++) liberer_livreH(&tab[i]);
+    for(int i = 0; i < (bh->m); i++) liberer_livreH(&tab[i]);
 
-    free(b->T);
+    free(bh->T);
 
-    free(b);
+    free(bh);
 }
 
-void inserer(BiblioH* b,int num,char* titre,char* auteur){
+void inserer(BiblioH* bh,int num,char* titre,char* auteur){
 
 	LivreH* lh;
 
 	if ((lh=creer_livreH(num,titre,auteur)) == NULL) return;
 
-    int clefH = fonctionHachage(lh->clef,b->m);
+    int clefH = fonctionHachage(lh->clef,bh->m);
 
-    lh -> suivant = b -> T[clefH];
+    lh -> suivant = bh -> T[clefH];
 
-    b -> T[clefH] = lh;
+    bh -> T[clefH] = lh;
+
+    bh -> nE++;
 	
 }
 
-int main(){
-    printf("%d\n",fonctionClef("abcd"));
-    printf("%f\n",A);
-    return 0;
+void afficher_livreH(LivreH* lh){
+
+    if (lh==NULL) return;
+
+    for(LivreH* l = lh; l; l = l -> suivant){
+
+        printf("num : %d, titre : %s, auteur : %s\n",l->num,l->titre,l->auteur);
+    }
 }
+
+void afficher_biblioH(BiblioH* bh){
+
+    if (bh==NULL) return;
+
+    if (bh->nE == 0) return;
+    
+    LivreH* lh;
+    
+    for (int i = 0; i < bh->m; lh = bh->T[i++]) afficher_livreH(lh);
+    
+}
+
+int main(void){
+    LivreH* l = creer_livreH(1,"abc","def");
+    l->suivant = creer_livreH(2,"fokods","idjfi");
+    afficher_livreH(l);
+}
+
