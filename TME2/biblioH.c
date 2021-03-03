@@ -137,8 +137,14 @@ void afficher_biblioH(BiblioH* bh){
     if (bh==NULL) return;
 
     if (bh->nE == 0) return;
+
+    LivreH* lh;
+
+    int i = 0;
+
+    while(lh = bh -> T[i++], i <= bh->m) afficher_livreH(lh);
     
-    for (int i = 0; i < bh->m; i++) afficher_livreH(bh->T[i]);
+    /*for (int i = 0; i < bh->m; i++) afficher_livreH(bh->T[i]);*/
 
 }
 

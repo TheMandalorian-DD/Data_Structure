@@ -16,4 +16,4 @@ biblioH.o : biblioH.h
 .PHONY : clean
 clean :
 	-rm biblio $(objects)
-	-rm testH $(objects2)
+	-rm biblioH $(objects2)
