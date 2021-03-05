@@ -268,8 +268,8 @@ void fusion(BiblioH* b1, BiblioH* b2){
         *lp = b1->T[i];
         
         b1->T[i] = b2->T[i];
-
-       b2->T[i] = NULL;
+        
+        b2->T[i] = NULL;
 
     }
 
@@ -294,7 +294,7 @@ BiblioH *recherche_exemplaires(BiblioH *bh){
 
                 if (lh1 != lh2 && strcmp(lh1->titre,lh2->titre)==0 && strcmp(lh1->auteur,lh2->auteur)==0){
                     
-                    inserer_en_tete(b,lh2->num,lh2->titre,lh2->auteur);
+                    inserer(b,lh2->num,lh2->titre,lh2->auteur);
             
                 }
 
