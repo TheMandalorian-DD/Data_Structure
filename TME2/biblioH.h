@@ -33,6 +33,17 @@ void afficher_livreH(LivreH* lh);
 
 void afficher_biblioH(BiblioH* bh);
 
+LivreH *recherche_ouvrage_num(BiblioH *bh, int num);
+
+LivreH *recherche_ouvrage_titre(BiblioH *bh, char *titre);
+
+BiblioH *recherche_meme_auteur(BiblioH *bh, char *auteur);
+
+void supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur);
+
+void fusion(BiblioH* b1, BiblioH* b2);
+
+BiblioH *recherche_exemplaires(BiblioH *bh);
 
 #endif
 
