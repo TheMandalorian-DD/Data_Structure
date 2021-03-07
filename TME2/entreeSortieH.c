@@ -7,9 +7,20 @@
 
 #include "biblioH.h"
 
+int getHashSize(int n) {
+	
+	for (int i = 0; i < PRIMESIZE; i++) {
+		
+		if (n < PrimeList[i] * 0.75) return PrimeList[i];
+		
+	}
+
+	return PrimeList[PRIMESIZE - 1];
+}
+
 BiblioH* charger_n_entrees(char* nomfic, int n){
 
-	BiblioH *bh = creer_biblioH(TAILLE_HACHAGE);
+	BiblioH *bh = creer_biblioH(getHashSize(n));
 
 	FILE *f = fopen(nomfic,"r");
 
