@@ -52,22 +52,15 @@ void enregistrer_biblioH(BiblioH *bh, char* nomfic){
 		exit(EXIT_FAILURE);
 	}
 
-    LivreH* lh;
-
 	for(int i = 0; i < bh->m; i++){
+		
+		for(LivreH* lh = bh -> T[i]; lh; lh = lh -> suivant){
+			
+			fprintf(f,"%d %s %s\n",lh -> num, lh -> titre, lh -> auteur);
+			
+		}
+		
+	}
 
-        lh = bh -> T[i];
-
-        if (lh!=NULL){
-            
-            for(; lh; lh = lh -> suivant){
-                
-                fprintf(f,"%d %s %s\n",lh -> num, lh -> titre, lh -> auteur);
-                
-            }
-            
-        }
-    
-    }
     fclose(f);
 }
