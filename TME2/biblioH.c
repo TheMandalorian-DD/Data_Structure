@@ -1,4 +1,5 @@
 #include "biblioH.h"
+#include "entreeSortieH.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -12,6 +13,7 @@ int fonctionClef(char* auteur){
     int somme = 0;
 
     for(int i = 0; auteur[i]!='\0'; i++){
+        
         somme += (int)auteur[i];
     }
 
@@ -129,10 +131,7 @@ void afficher_livreH(LivreH* lh){
 
     if (lh==NULL) return;
 
-    for(; lh; lh = lh -> suivant){
-
-        printf("num : %d, titre : %s, auteur : %s\n",lh->num,lh->titre,lh->auteur);
-    }
+    printf("num : %d, titre : %s, auteur : %s\n",lh -> num, lh -> titre, lh -> auteur);
 }
 
 void afficher_biblioH(BiblioH* bh){
@@ -145,7 +144,11 @@ void afficher_biblioH(BiblioH* bh){
 
     int i = 0;
 
-    while(lh = bh -> T[i++], i <= bh->m) afficher_livreH(lh);
+    while(lh = bh -> T[i++], i <= bh->m){
+        
+        for(; lh; lh = lh -> suivant) afficher_livreH(lh);
+
+    }
     
     /*for (int i = 0; i < bh->m; i++) afficher_livreH(bh->T[i]);*/
 
@@ -233,7 +236,7 @@ BiblioH *recherche_meme_auteur(BiblioH *bh, char *auteur){
 
 }
 
-void supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur) {
+int supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur) {
 
   LivreH* curr;
 
@@ -245,13 +248,17 @@ void supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur) {
 
   suivp = &curr->suivant);
 
-  if (curr == NULL) return;
+  if (curr == NULL) return 0;
 
   *suivp = curr->suivant;
 
   curr->suivant = NULL;
 
   liberer_livreH(&curr);
+
+  bh->nE--;
+
+  return 1;
 
 }
 

@@ -39,7 +39,7 @@ LivreH *recherche_ouvrage_titre(BiblioH *bh, char *titre);
 
 BiblioH *recherche_meme_auteur(BiblioH *bh, char *auteur);
 
-void supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur);
+int supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur);
 
 void fusion(BiblioH* b1, BiblioH* b2);
 

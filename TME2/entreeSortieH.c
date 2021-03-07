@@ -71,4 +71,3 @@ void enregistrer_biblioH(BiblioH *bh, char* nomfic){
     }
     fclose(f);
 }
-
