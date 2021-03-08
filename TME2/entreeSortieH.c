@@ -7,6 +7,8 @@
 
 #include "biblioH.h"
 
+/* retourne un entier (taille de hachage) adapté à la bibliothèque selon le nombre d'ouvrage */
+
 int getHashSize(int n) {
 	
 	for (int i = 0; i < PRIMESIZE; i++) {
@@ -17,6 +19,8 @@ int getHashSize(int n) {
 
 	return PrimeList[PRIMESIZE - 1];
 }
+
+/* retourne une bibliothèque d'ouvrages lue dans un fichier et de taille n passés en paramètre */
 
 BiblioH* charger_n_entrees(char* nomfic, int n){
 
@@ -49,6 +53,8 @@ BiblioH* charger_n_entrees(char* nomfic, int n){
 
 	return bh;
 }
+
+/* stock une bibliothèque passé en paramètre dans un fichier 'nomfic' */
 
 void enregistrer_biblioH(BiblioH *bh, char* nomfic){
 

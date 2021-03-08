@@ -56,15 +56,11 @@ int main(int argc, char** argv){
 
     	printf("\nQue voulez-vous faire ? ...\n");
 
-    	/* sleep(1); */
-
     	menu();
 
     	fgets(ligne,256,stdin);
 
 		sscanf(ligne,"%d",&rep);
-
-		/* rep = strtod(r, NULL); //*/
 
     	switch(rep){
 

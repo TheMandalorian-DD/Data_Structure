@@ -1,7 +1,10 @@
 #ifndef _BIBLIOH_H_
 #define _BIBLIOH_H_
 
+#define A (sqrt(5)-1) / 2
+
 #define PRIMESIZE 26
+
 static const int PrimeList[PRIMESIZE] = {
     53,        97,        193,       389,       769,       1543,     3079,
     6151,      12289,     24593,     49157,     98317,     196613,   393241,

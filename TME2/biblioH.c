@@ -6,24 +6,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define A (sqrt(5)-1) / 2
+/* retourne un entier (clef) à partir du nom de l'auteur */
 
 int fonctionClef(char* auteur){
 
     int somme = 0;
 
     for(int i = 0; auteur[i]!='\0'; i++){
-        
+
         somme += (int)auteur[i];
     }
 
     return somme;
 }
 
+/* retourne un entier (index de la clé calculée à partir de la clé et de la taille) pour la table de hachage */
+
 int fonctionHachage(int cle, int m){
 
     return (int)(m * ((double)cle * A - (int)(cle * A)));
 }
+
+/* création d'un livre dont les données sont passées en paramètre */
 
 LivreH* creer_livreH(int num,char* titre,char* auteur){
 
@@ -60,6 +64,8 @@ LivreH* creer_livreH(int num,char* titre,char* auteur){
 	return livre;
 }
 
+/* libère le contenu du livre passé en paramètre */
+
 void liberer_livreH(LivreH** lh){
     
     LivreH* curr = *lh;
@@ -75,6 +81,8 @@ void liberer_livreH(LivreH** lh){
         free(curr);
     }
 }
+
+/* créer une bibliothèque dont la taille est passée en paramètre */
 
 BiblioH* creer_biblioH(int m){
 
@@ -100,6 +108,8 @@ BiblioH* creer_biblioH(int m){
     return bh;
 }
 
+/* libère le contenu de la bibliothèque passée en paramètre */
+
 void liberer_biblioH(BiblioH* bh){
 
     LivreH** tab = bh -> T;
@@ -110,6 +120,8 @@ void liberer_biblioH(BiblioH* bh){
 
     free(bh);
 }
+
+/* insère un livre (dont les données ont été passé en paramètre) dans la bibliothèque */
 
 void inserer(BiblioH* bh,int num,char* titre,char* auteur){
 
@@ -127,12 +139,16 @@ void inserer(BiblioH* bh,int num,char* titre,char* auteur){
 	
 }
 
+/* affiche les données du livre passé en paramètre */
+
 void afficher_livreH(LivreH* lh){
 
     if (lh==NULL) return;
 
     printf("num : %d, titre : %s, auteur : %s\n",lh -> num, lh -> titre, lh -> auteur);
 }
+
+/* affiche le contenu de la bibliotèque passée en paramètre */
 
 void afficher_biblioH(BiblioH* bh){
 
@@ -153,6 +169,8 @@ void afficher_biblioH(BiblioH* bh){
     /*for (int i = 0; i < bh->m; i++) afficher_livreH(bh->T[i]);*/
 
 }
+
+/* recherche et retourne le livre portant le numéro 'num' */
 
 LivreH *recherche_ouvrage_num(BiblioH *bh, int num){
 
@@ -178,6 +196,8 @@ LivreH *recherche_ouvrage_num(BiblioH *bh, int num){
     return NULL;
 }
 
+/* recherche et retourne le livre portant le titre 'titre' */
+
 LivreH *recherche_ouvrage_titre(BiblioH *bh, char *titre){
 
     if (bh==NULL) return NULL;
@@ -201,6 +221,8 @@ LivreH *recherche_ouvrage_titre(BiblioH *bh, char *titre){
     }
     return NULL;
 }
+
+/* recherche et retourne une bibliothèque de tout les livres de l'auteur 'auteur' */
 
 BiblioH *recherche_meme_auteur(BiblioH *bh, char *auteur){
 
@@ -236,6 +258,8 @@ BiblioH *recherche_meme_auteur(BiblioH *bh, char *auteur){
 
 }
 
+/* supprime le livre (dont les données ont été passé en paramètre) de la bibliothèque */
+
 int supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur) {
 
   LivreH* curr;
@@ -262,6 +286,8 @@ int supprimer_livreH(BiblioH* bh, int num, char* titre, char* auteur) {
 
 }
 
+/* ajoute la deuxième bibliothèque à la première */
+
 void fusion(BiblioH* b1, BiblioH* b2){
 
     for(int i = 0; i < b2 -> m; i++){
@@ -284,6 +310,8 @@ void fusion(BiblioH* b1, BiblioH* b2){
 
     liberer_biblioH(b2);
 }
+
+/* recherche et retourne une bibliothèque dans laquelle on y retrouve plusieurs exemplaires d'ouvrages (même titre et même auteur) */
 
 BiblioH *recherche_exemplaires(BiblioH *bh){
 
