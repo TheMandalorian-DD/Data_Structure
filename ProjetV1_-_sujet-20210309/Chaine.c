@@ -2,7 +2,7 @@
 
 #include <Chaine.h>
 
-Chaines* lectureChaines(FILE *f){
+Chaines* lectureChaines(FILE *f){ 
     
     Chaines* chaine = malloc(sizeof(Chaines));
 
@@ -66,4 +66,23 @@ Chaines* lectureChaines(FILE *f){
 
     return chaine;
 
+}
+
+
+void ecrireChaines(Chaines *C, FILE *f){
+
+    fprintf(f,"NbChain: %d\nGamma: %d\n", C -> nbChaines, C -> gamma);
+    
+    for(CellChaine* L_cell = C -> chaines; L_cell; L_cell = L_cell -> suiv){
+
+        int taille_L_point = 0;
+
+        for(CellPoint* L_point = L_cell -> points; L_point; L_point = L_point -> suiv) taille_L_point++;
+        
+        fprintf(f,"%d %d ", L_cell -> numero, taille_L_point);
+
+        for(CellPoint* L_point = L_cell -> points; L_point; L_point = L_point -> suiv) fprintf(f,"%f %f ", L_point -> x, L_point -> y);
+        
+        fprintf(f,"\n");
+    }
 }
