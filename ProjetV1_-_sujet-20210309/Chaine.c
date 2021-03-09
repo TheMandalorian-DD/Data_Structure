@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include <stdio.h>
 
 #include <Chaine.h>
 
@@ -38,7 +38,7 @@ Chaines* lectureChaines(FILE *f){
 
         CellPoint* L_point = NULL;
 
-        for(int i = 0; i < nP; i++){
+        for(int j = 0; j < nP; j++){
 
             CellPoint* point = malloc(sizeof(CellPoint));
 
