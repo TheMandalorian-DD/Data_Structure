@@ -48,17 +48,17 @@ Chaines* lectureChaines(FILE *f){
 
             point -> y = y;
 
-            point -> suiv = L_point; /*        */
+            point -> suiv = L_point; /* on insère le point dans la liste L_point */
 
-            L_point = point; 
+            L_point = point; /* on met à jour notre liste L_point */
 
         }
 
         cell -> points = L_point;
 
-        cell -> suiv = L_cell;
+        cell -> suiv = L_cell; /* on insère la cellule dans la liste L_cell */
 
-        L_cell = cell;
+        L_cell = cell; /* on met à jour notre liste L_cell */
 
     }
 
