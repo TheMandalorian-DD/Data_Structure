@@ -26,7 +26,7 @@ Chaines* lectureChaines(FILE *f){
 
     float x, y;
 
-    CellChaine* L_cell = NULL;
+    CellChaine* L_cell = NULL; /* initialisation de la liste des cellules */
 
     for(int i = 0; i < chaine -> nbChaines; i++){
 
@@ -36,7 +36,7 @@ Chaines* lectureChaines(FILE *f){
 
         cell -> numero = num;
 
-        CellPoint* L_point = NULL;
+        CellPoint* L_point = NULL; /* initialisation de la liste de points */
 
         for(int j = 0; j < nP; j++){
 
@@ -48,7 +48,7 @@ Chaines* lectureChaines(FILE *f){
 
             point -> y = y;
 
-            point -> suiv = L_point;
+            point -> suiv = L_point; /*        */
 
             L_point = point; 
 
@@ -63,5 +63,7 @@ Chaines* lectureChaines(FILE *f){
     }
 
     chaine -> chaines = L_cell;
+
+    return chaine;
 
 }
