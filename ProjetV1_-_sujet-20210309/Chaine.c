@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-#include <Chaine.h>
+#include "Chaine.h"
 
 Chaines* lectureChaines(FILE *f){ 
     
@@ -8,17 +10,17 @@ Chaines* lectureChaines(FILE *f){
 
     char ligne[256], s[256];
 
-    int gamma, nbChaines;
+    int nbChaines = 0, gamma = 0;;
 
     /* première ligne */
 
-    if (fgets(ligne,sizeof(ligne),f) != NULL) sscanf(ligne,"%s %d", s, &nbChaines);
+    if (fgets(ligne,256,f) != NULL) sscanf(ligne,"%s %d", s, &nbChaines);
     
     chaine -> nbChaines = nbChaines;
 
     /* deuxième ligne */
 
-    if (fgets(ligne,sizeof(ligne),f) != NULL) sscanf(ligne,"%s %d", s, &gamma);
+    if (fgets(ligne,256,f) != NULL) sscanf(ligne,"%s %d", s, &gamma);
     
     chaine -> gamma = gamma;
     
@@ -85,4 +87,19 @@ void ecrireChaines(Chaines *C, FILE *f){
         
         fprintf(f,"\n");
     }
+}
+
+int main(void){
+
+    FILE *f1 = fopen("00014_burma.cha","r");
+
+    Chaines *C = lectureChaines(f1);
+
+    fclose(f1);
+
+    FILE *f2 = fopen("C.txt","w");
+
+    ecrireChaines(C,f2);
+
+    return 0;
 }
