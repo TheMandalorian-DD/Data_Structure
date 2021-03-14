@@ -83,7 +83,7 @@ void ecrireChaines(Chaines *C, FILE *f){
         
         fprintf(f,"%d %d ", L_cell -> numero, taille_L_point);
 
-        for(CellPoint* L_point = L_cell -> points; L_point; L_point = L_point -> suiv) fprintf(f,"%f %f ", L_point -> x, L_point -> y);
+        for(CellPoint* L_point = L_cell -> points; L_point; L_point = L_point -> suiv) fprintf(f,"%.2f %.2f ", L_point -> x, L_point -> y);
         
         fprintf(f,"\n");
     }
@@ -100,6 +100,8 @@ int main(void){
     FILE *f2 = fopen("C.txt","w");
 
     ecrireChaines(C,f2);
+
+    fclose(f2);
 
     return 0;
 }
