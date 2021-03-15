@@ -18,6 +18,8 @@ int main(void){
 
     fclose(f2);
 
+    printf("longueur totale = %.2f\n", longueurTotale(C));
+
     return 0;
     
 }
