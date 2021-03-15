@@ -5,16 +5,37 @@ int main(void){
 
     FILE *f = fopen("test.txt","r");
 
-    int num, nP;
-    float x, y;
+    char ligne[256], s[256];
 
-    char LIGNE[256];
+    int gamma, nbChaines;
+
+    /* première ligne */
+
+    if (fgets(ligne,256,f) != NULL){
+        
+        sscanf(ligne,"%s %d", s, &nbChaines);
+
+        printf("nbChaines : %d\n",nbChaines);
+
+    }
+
+    /* deuxième ligne */
+
+    if (fgets(ligne,256,f) != NULL){
+
+        sscanf(ligne,"%s %d", s, &gamma);
+
+        printf("gamma : %d\n",gamma);
+
+    }
+
+    int num, nP;
+
+    float x, y;
 
     int i = 0;
 
-    while(i<3){
-
-        //sscanf(LIGNE,"%d %d", &num, &nP);
+    for(int j = 0; j < nbChaines; j++){
         
         fscanf(f,"%d %d", &num, &nP);
         
@@ -29,13 +50,9 @@ int main(void){
 
         }
 
-        i++;
 
     }
-
     
-    
-
     fclose(f);
 
     return 0;

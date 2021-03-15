@@ -10,7 +10,7 @@ Chaines* lectureChaines(FILE *f){
 
     char ligne[256], s[256];
 
-    int nbChaines = 0, gamma = 0;;
+    int nbChaines = 0, gamma = 0;
 
     /* première ligne */
 
@@ -87,21 +87,4 @@ void ecrireChaines(Chaines *C, FILE *f){
         
         fprintf(f,"\n");
     }
-}
-
-int main(void){
-
-    FILE *f1 = fopen("00014_burma.cha","r");
-
-    Chaines *C = lectureChaines(f1);
-
-    fclose(f1);
-
-    FILE *f2 = fopen("C.txt","w");
-
-    ecrireChaines(C,f2);
-
-    fclose(f2);
-
-    return 0;
 }
