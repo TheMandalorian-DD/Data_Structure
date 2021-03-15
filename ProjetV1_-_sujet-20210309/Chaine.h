@@ -1,6 +1,10 @@
 #ifndef __CHAINE_H__
 #define __CHAINE_H__	
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include "SVGwriter.h"
 
 /* Liste chainee de points */
 typedef struct cellPoint{

@@ -1,22 +1,25 @@
-#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 #include "Chaine.h"
 
+
 int main(void){
 
-    FILE *f1 = fopen("00014_burma.cha","r");
+    FILE *f;
+    
+    f = fopen("00014_burma.cha","r");
 
-    Chaines *C = lectureChaines(f1);
+    Chaines *C = lectureChaines(f);
 
-    fclose(f1);
+    fclose(f);
 
-    FILE *f2 = fopen("Chaine.txt","w");
+    f = fopen("Chaine.txt","w");
 
-    ecrireChaines(C,f2);
+    ecrireChaines(C,f);
 
-    fclose(f2);
+    fclose(f);
+
+    afficheChainesSVG(C,"test");
 
     printf("longueur totale = %.2f\n", longueurTotale(C));
 

@@ -1,9 +1,5 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-
 #include "Chaine.h"
+
 
 Chaines* lectureChaines(FILE *f){ 
     
@@ -90,51 +86,50 @@ void ecrireChaines(Chaines *C, FILE *f){
     }
 }
 
-// void afficheChainesSVG(Chaines *C, char* nomInstance){
-//     int i;
-//     double maxx=0,maxy=0,minx=1e6,miny=1e6;
-//     CellChaine *ccour;
-//     CellPoint *pcour;
-//     double precx,precy;
-//     SVGwriter svg;
-//     ccour=C->chaines;
-//     while (ccour!=NULL){
-//         pcour=ccour->points;
-//         while (pcour!=NULL){
-//             if (maxx<pcour->x) maxx=pcour->x;
-//             if (maxy<pcour->y) maxy=pcour->y;
-//             if (minx>pcour->x) minx=pcour->x;
-//             if (miny>pcour->y) miny=pcour->y;  
-//             pcour=pcour->suiv;
-//         }
-//     ccour=ccour->suiv;
-//     }
-//     SVGinit(&svg,nomInstance,500,500);
-//     ccour=C->chaines;
-//     while (ccour!=NULL){
-//         pcour=ccour->points;
-//         SVGlineRandColor(&svg);
-//         SVGpoint(&svg,500*(pcour->x-minx)/(maxx-minx),500*(pcour->y-miny)/(maxy-miny)); 
-//         precx=pcour->x;
-//         precy=pcour->y;  
-//         pcour=pcour->suiv;
-//         while (pcour!=NULL){
-//             SVGline(&svg,500*(precx-minx)/(maxx-minx),500*(precy-miny)/(maxy-miny),500*(pcour->x-minx)/(maxx-minx),500*(pcour->y-miny)/(maxy-miny));
-//             SVGpoint(&svg,500*(pcour->x-minx)/(maxx-minx),500*(pcour->y-miny)/(maxy-miny));
-//             precx=pcour->x;
-//             precy=pcour->y;    
-//             pcour=pcour->suiv;
-//         }
-//         ccour=ccour->suiv;
-//     }
-//     SVGfinalize(&svg);
-// }
+void afficheChainesSVG(Chaines *C, char* nomInstance){
+    double maxx=0,maxy=0,minx=1e6,miny=1e6;
+    CellChaine *ccour;
+    CellPoint *pcour;
+    double precx,precy;
+    SVGwriter *svg=(SVGwriter *)malloc(sizeof(SVGwriter));
+    ccour=C->chaines;
+    while (ccour!=NULL){
+        pcour=ccour->points;
+        while (pcour!=NULL){
+            if (maxx<pcour->x) maxx=pcour->x;
+            if (maxy<pcour->y) maxy=pcour->y;
+            if (minx>pcour->x) minx=pcour->x;
+            if (miny>pcour->y) miny=pcour->y;  
+            pcour=pcour->suiv;
+        }
+    ccour=ccour->suiv;
+    }
+    SVGinit(svg,nomInstance,500,500);
+    ccour=C->chaines;
+    while (ccour!=NULL){
+        pcour=ccour->points;
+        SVGlineRandColor(svg);
+        SVGpoint(svg,500*(pcour->x-minx)/(maxx-minx),500*(pcour->y-miny)/(maxy-miny)); 
+        precx=pcour->x;
+        precy=pcour->y;  
+        pcour=pcour->suiv;
+        while (pcour!=NULL){
+            SVGline(svg,500*(precx-minx)/(maxx-minx),500*(precy-miny)/(maxy-miny),500*(pcour->x-minx)/(maxx-minx),500*(pcour->y-miny)/(maxy-miny));
+            SVGpoint(svg,500*(pcour->x-minx)/(maxx-minx),500*(pcour->y-miny)/(maxy-miny));
+            precx=pcour->x;
+            precy=pcour->y;    
+            pcour=pcour->suiv;
+        }
+        ccour=ccour->suiv;
+    }
+    SVGfinalize(svg);
+}
 
 double longueurChaine(CellChaine* c){
 
     double somme = 0;
 
-    for(CellPoint* L1_point = c -> points; L1_point -> suiv; L1_point = L1_point -> suiv){
+    for(CellPoint* L1_point = c -> points; L1_point -> suiv /* on vérifie que le prochain point n'est pas NULL */; L1_point = L1_point -> suiv){
 
         CellPoint* p1 = L1_point;
 
