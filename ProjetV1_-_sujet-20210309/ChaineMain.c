@@ -21,6 +21,8 @@ int main(void){
 
     printf("longueur totale = %.2f\n", longueurTotale(C));
 
+    printf("nombre d'occurrence = %d\n", comptePointsTotal(C));
+
     return 0;
     
 }
