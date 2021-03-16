@@ -1,5 +1,3 @@
-#include <string.h>
-
 #include "Chaine.h"
 
 
@@ -19,7 +17,7 @@ int main(void){
 
     fclose(f);
 
-    afficheChainesSVG(C,"test");
+    afficheChainesSVG(C,"test_graph");
 
     printf("longueur totale = %.2f\n", longueurTotale(C));
 
