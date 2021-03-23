@@ -128,7 +128,7 @@ void ecrireReseau(Reseau *R, FILE *f){
 
         for(CellNoeud* v = cell_noeud -> nd -> voisins; v; v = v -> suiv){
 
-            if (v -> nd -> num > cell_noeud -> nd -> num) fprintf(f,"l %d %d\n", cell_noeud -> nd -> num, v -> nd -> num);
+            if (v -> nd -> num < cell_noeud -> nd -> num) fprintf(f,"l %d %d\n", v -> nd -> num, cell_noeud -> nd -> num);
         }
 
     }
