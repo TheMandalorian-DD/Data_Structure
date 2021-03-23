@@ -63,6 +63,11 @@ Reseau *reconstitueReseauListe(Chaines *C) {
 
 void ajoute_voisins(Noeud *node1, Noeud *node2) {
   CellNoeud *list_node1 = malloc(sizeof(CellNoeud));
+  CellNoeud *voisins = node1->voisins;
+  while(voisins != NULL){
+    if (voisins->nd == node2) return;
+    voisins = voisins->suiv;
+  }
   list_node1->nd = node2;
   list_node1->suiv = node1->voisins;
   CellNoeud *list_node2 = malloc(sizeof(CellNoeud));
@@ -119,8 +124,15 @@ void ecrireReseau(Reseau *R, FILE *f){
     
     fprintf(f,"\n");
     
-    for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv) fprintf(f,"l %d %d\n", cell_noeud -> nd -> num, cell_noeud -> nd -> voisins -> nd -> num);
-    
+    for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv){
+
+        for(CellNoeud* v = cell_noeud -> nd -> voisins; v; v = v -> suiv){
+
+            if (v -> nd -> num > cell_noeud -> nd -> num) fprintf(f,"l %d %d\n", cell_noeud -> nd -> num, v -> nd -> num);
+        }
+
+    }
+        
     fprintf(f,"\n");
     
     for(CellCommodite* cell_com = R -> commodites; cell_com; cell_com = cell_com -> suiv) fprintf(f,"k %d %d\n", cell_com -> extrA -> num, cell_com -> extrB -> num);
