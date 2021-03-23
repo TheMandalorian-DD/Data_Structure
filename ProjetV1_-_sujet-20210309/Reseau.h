@@ -1,6 +1,7 @@
 #ifndef __RESEAU_H__
 #define __RESEAU_H__
-#include "Chaine.h"
+#include "Chaine.h" 
+
 
 typedef struct noeud Noeud;
 
@@ -33,9 +34,13 @@ typedef struct {
 
 Noeud* rechercheCreeNoeudListe(Reseau *R, double x, double y);
 Reseau* reconstitueReseauListe(Chaines *C);
+void ajoute_voisins(Noeud *node1, Noeud *node2);
+void ajoute_commodites(Reseau *R, Noeud *node1, Noeud *node2);
 void ecrireReseau(Reseau *R, FILE *f);
 int nbLiaisons(Reseau *R);
 int nbCommodites(Reseau *R);
 void afficheReseauSVG(Reseau *R, char* nomInstance);
 #endif
+
+
 

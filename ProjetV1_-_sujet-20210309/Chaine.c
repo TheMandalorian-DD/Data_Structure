@@ -1,4 +1,10 @@
+
 #include "Chaine.h"
+
+#include <math.h>
+#include <stdlib.h>
+
+#include "SVGwriter.h"
 
 
 Chaines* lectureChaines(FILE *f){ 
@@ -60,7 +66,7 @@ Chaines* lectureChaines(FILE *f){
         L_cell = cell; /* on met à jour notre liste L_cell */
 
     }
-
+ 
     chaine -> chaines = L_cell;
 
     return chaine;
@@ -164,3 +170,4 @@ int comptePointsTotal(Chaines *C){
 
     return n;
 }
+
