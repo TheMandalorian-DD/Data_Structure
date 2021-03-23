@@ -41,20 +41,21 @@ Reseau *reconstitueReseauListe(Chaines *C) {
   R->gamma = C->gamma;
   R->noeuds = NULL;
   R->commodites = NULL;
-  Noeud *node, *node_pre;
+  Noeud *node, *node_pre,*node_first;
   CellChaine *list_chaine = C->chaines;
   while (list_chaine != NULL) {
     CellPoint *list_point = list_chaine->points;
     node_pre = NULL;
+    node_first = rechercheCreeNoeudListe(R,list_point->x,list_point->y);
     while (list_point != NULL) {
       node = rechercheCreeNoeudListe(R, list_point->x, list_point->y);
       if (node_pre != NULL) {
         ajoute_voisins(node_pre, node);
-        ajoute_commodites(R, node_pre, node);
       }
       node_pre = node;
       list_point = list_point->suiv;
     }
+    ajoute_commodites(R, node_first, node);
     list_chaine = list_chaine->suiv;
   }
   return R;
@@ -87,10 +88,11 @@ int nbLiaisons(Reseau *R){
 
         Noeud* n = cell_noeud -> nd;
 
-        if (n->voisins) nbL++;
+        for(CellNoeud* v = n -> voisins; v; v = v -> suiv) nbL++;
+
     }
 
-    return nbL;
+    return nbL/2;
  
 }
 
@@ -113,13 +115,13 @@ void ecrireReseau(Reseau *R, FILE *f){
     
     fprintf(f,"Gamma = %d\n\n", R -> gamma);
     
-    for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv) fprintf(f,"%d %.2f %.2f\n",cell_noeud -> nd -> num, cell_noeud -> nd -> x, cell_noeud -> nd -> y);
+    for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv) fprintf(f,"v %d %.2f %.2f\n",cell_noeud -> nd -> num, cell_noeud -> nd -> x, cell_noeud -> nd -> y);
     
     fprintf(f,"\n");
     
     for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv) fprintf(f,"l %d %d\n", cell_noeud -> nd -> num, cell_noeud -> nd -> voisins -> nd -> num);
     
-   fprintf(f,"\n");
+    fprintf(f,"\n");
     
     for(CellCommodite* cell_com = R -> commodites; cell_com; cell_com = cell_com -> suiv) fprintf(f,"k %d %d\n", cell_com -> extrA -> num, cell_com -> extrB -> num);
 
