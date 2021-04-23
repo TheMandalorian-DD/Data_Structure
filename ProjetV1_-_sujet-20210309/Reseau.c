@@ -1,37 +1,24 @@
 
 #include "Reseau.h"
 #include "SVGwriter.h"
-#include <stdlib.h>
+#include <stdlib.h> 
 
 Noeud* rechercheCreeNoeudListe(Reseau *R, double x, double y){
 
     for(CellNoeud* L_noeud = R -> noeuds; L_noeud; L_noeud = L_noeud -> suiv){
-
         Noeud* noeud = L_noeud -> nd;
-
         if (noeud -> x == x && noeud -> y == y) return noeud; 
     }
-
     CellNoeud* new_noeud = malloc(sizeof(CellNoeud));
-
     Noeud* n = malloc(sizeof(Noeud));
-    
     n -> num = (R -> nbNoeuds) + 1;
-
     n -> x = x;
-
     n -> y = y;
-
     n -> voisins = NULL;
-
     new_noeud -> nd = n;
-
     new_noeud -> suiv = R -> noeuds;
-
     R -> noeuds = new_noeud;
-
     R -> nbNoeuds += 1;
-
     return n;
 }
 
@@ -86,63 +73,40 @@ void ajoute_commodites(Reseau *R, Noeud *node1, Noeud *node2) {
 }
 
 int nbLiaisons(Reseau *R){
-    
     int nbL = 0;
-
     for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv){
-
         Noeud* n = cell_noeud -> nd;
-
         for(CellNoeud* v = n -> voisins; v; v = v -> suiv) nbL++;
-
     }
-
     return nbL/2;
- 
 }
 
-int nbCommodites(Reseau *R){
-
+int nbCommodites(Reseau *R){ 
     int nbCom = 0;
-
     for(CellCommodite* cell_com = R -> commodites; cell_com; cell_com = cell_com -> suiv) nbCom++;
-
     return nbCom;
 }
 
 void ecrireReseau(Reseau *R, FILE *f){
-    
     fprintf(f,"nbNoeud = %d\n", R -> nbNoeuds);
-    
     fprintf(f,"nbLiaison = %d\n",nbLiaisons(R));
-    
     fprintf(f,"nbCom = %d\n",nbCommodites(R));
-    
     fprintf(f,"Gamma = %d\n\n", R -> gamma);
-    
     for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv) fprintf(f,"v %d %.2f %.2f\n",cell_noeud -> nd -> num, cell_noeud -> nd -> x, cell_noeud -> nd -> y);
-    
     fprintf(f,"\n");
-    
     for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv){
-
-        for(CellNoeud* v = cell_noeud -> nd -> voisins; v; v = v -> suiv){
-
-            if (v -> nd -> num < cell_noeud -> nd -> num) fprintf(f,"l %d %d\n", v -> nd -> num, cell_noeud -> nd -> num);
+      for(CellNoeud* v = cell_noeud -> nd -> voisins; v; v = v -> suiv){
+        if (v -> nd -> num < cell_noeud -> nd -> num) fprintf(f,"l %d %d\n", v -> nd -> num, cell_noeud -> nd -> num);
         }
-
-    }
-        
+    } 
     fprintf(f,"\n");
-    
     for(CellCommodite* cell_com = R -> commodites; cell_com; cell_com = cell_com -> suiv) fprintf(f,"k %d %d\n", cell_com -> extrA -> num, cell_com -> extrB -> num);
-
 }
 
 
 
 void afficheReseauSVG(Reseau *R, char* nomInstance){
-    CellNoeud *courN,*courv;
+    CellNoeud *courN,*courv; 
     SVGwriter svg;
     double maxx=0,maxy=0,minx=1e6,miny=1e6;
 
