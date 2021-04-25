@@ -1,17 +1,24 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -lm
-objectsChaine = ChaineMain.o Chaine.o SVGwriter.o
-objects = ReconstitueReseau.o Reseau.o SVGwriter.o Chaine.o
+objectsReseau = ReconstitueReseau.o Reseau.o SVGwriter.o Chaine.o
+objectsHash = ReconstitueHash.o Reseau.o SVGwriter.o Chaine.o Hachage.o
+objectsArbre = ReconstitueArbre.o Reseau.o SVGwriter.o Chaine.o ArbreQuat.o
 
-Chaine : $(objectsChaine)
-	$(CC) -o $@ $(CFLAGS) $(objectsChaine)
-
-ReconstitueReseau : $(objects)
-	$(CC) -o $@ $(CFLAGS) $(objects)
-
+ReconstitueArbre : $(objectsArbre)
+	$(CC) -o $@ $(CFLAGS) $(objectsArbre)
+ReconstitueHash : $(objetcs) $(objectsHash)
+	$(CC) -o $@ $(CFLAGS) $(objetcs) $(objectsHash)
+ReconstitueReseau : $(objectsReseau)
+	$(CC) -o $@ $(CFLAGS) $(objectsReseau)
+SVGwriter.o : SVGwriter.h
+Chaine.o : Chaine.h SVGwriter.h
+Reseau.o: Reseau.h Chaine.h
+Hachage.o : Hachage.h Reseau.h
+ArbreQuat.o : ArbreQuat.h Reseau.h
 .PHONY : clean
 clean :
-	-rm Chaine $(objectsChaine) 
-	-rm ReconstitueReseau $(objects) 
-
-	
+	-rm ReconstitueArbre $(objectsArbre)
+	-rm ReconstitueHash $(objectsHash)
+	-rm ReconstitueReseau $(objectsReseau)
+	-rm graph_arbre.html
+	-rm *.res
