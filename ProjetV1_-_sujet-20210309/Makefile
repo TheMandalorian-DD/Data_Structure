@@ -1,18 +1,18 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -lm
-objetcsChaine = ChaineMain.o SVGwriter.o Chaine.o
+objectsChaine = ChaineMain.o SVGwriter.o Chaine.o
 objectsReseau = ReconstitueReseau.o Reseau.o SVGwriter.o Chaine.o
 objectsHash = ReconstitueHash.o Reseau.o SVGwriter.o Chaine.o Hachage.o
 objectsArbre = ReconstitueArbre.o Reseau.o SVGwriter.o Chaine.o ArbreQuat.o
 
 ReconstitueArbre : $(objectsArbre)
 	$(CC) -o $@ $(CFLAGS) $(objectsArbre)
-ReconstitueHash : $(objetcs) $(objectsHash)
-	$(CC) -o $@ $(CFLAGS) $(objetcs) $(objectsHash)
+ReconstitueHash : $(objectsHash)
+	$(CC) -o $@ $(CFLAGS) $(objectsHash)
 ReconstitueReseau : $(objectsReseau)
 	$(CC) -o $@ $(CFLAGS) $(objectsReseau)
-ChaineMain : $(objetcsChaine)
-	$(CC) -o $@ $(CFLAGS) $(objetcsChaine)
+ChaineMain : $(objectsChaine)
+	$(CC) -o $@ $(CFLAGS) $(objectsChaine)
 
 SVGwriter.o : SVGwriter.h
 Chaine.o : Chaine.h SVGwriter.h
@@ -24,4 +24,4 @@ clean :
 	-rm ReconstitueArbre $(objectsArbre)
 	-rm ReconstitueHash $(objectsHash)
 	-rm ReconstitueReseau $(objectsReseau)
-	-rm ChaineMain $(objetcsChaine)
+	-rm ChaineMain $(objectsChaine)
