@@ -133,3 +133,26 @@ void afficheReseauSVG(Reseau *R, char* nomInstance){
     SVGfinalize(&svg);
 }
 
+void liberer_noeud(CellNoeud* n){
+  while(n){
+    CellNoeud* tmp = n->suiv;
+    free(n->nd);
+    free(n);
+    n=tmp;
+  }
+}
+
+void liberer_commodite(CellCommodite* c){
+  while(c){
+    CellCommodite* tmp = c->suiv;
+    free(c);
+    c=tmp;
+  }
+}
+
+void liberer_reseau(Reseau* R){
+  liberer_noeud(R->noeuds);
+  liberer_commodite(R->commodites);
+  free(R);
+}
+

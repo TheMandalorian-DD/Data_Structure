@@ -10,6 +10,7 @@ int main(void) {
   fclose(f);
 
   Reseau *R = reconstitueReseauArbre(C);
+  liberer_chaine(C);
   afficheReseauSVG(R, "graph_arbre");
 
   f = fopen("arbre.res", "w");

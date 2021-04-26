@@ -107,8 +107,7 @@ void insererNoeudArbre(Noeud* n, ArbreQuat** a, ArbreQuat* parent){
     }
 }
 
-Noeud* rechercheCreeNoeudArbre(Reseau* R, ArbreQuat** a, ArbreQuat* parent,
-                               double x, double y) {
+Noeud* rechercheCreeNoeudArbre(Reseau* R, ArbreQuat** a, ArbreQuat* parent, double x, double y) {
   if (*a == NULL) {
     Noeud* new_node = malloc(sizeof(Noeud));
     new_node->num = R->nbNoeuds + 1;
@@ -172,34 +171,26 @@ Reseau* reconstitueReseauArbre(Chaines* C) {
     node_pre = NULL;
     if (list_point->x < root->xc) {
       if (list_point->y < root->yc) {
-        node_first = rechercheCreeNoeudArbre(R, &root->so, root, list_point->x,
-                                             list_point->y);
+        node_first = rechercheCreeNoeudArbre(R, &root->so, root, list_point->x, list_point->y);
       } else {
-        node_first = rechercheCreeNoeudArbre(R, &root->no, root, list_point->x,
-                                             list_point->y);
+        node_first = rechercheCreeNoeudArbre(R, &root->no, root, list_point->x, list_point->y);
       }
     } else if (list_point->y < root->yc) {
-      node_first = rechercheCreeNoeudArbre(R, &root->se, root, list_point->x,
-                                           list_point->y);
+      node_first = rechercheCreeNoeudArbre(R, &root->se, root, list_point->x, list_point->y);
     } else {
-      node_first = rechercheCreeNoeudArbre(R, &root->ne, root, list_point->x,
-                                           list_point->y);
+      node_first = rechercheCreeNoeudArbre(R, &root->ne, root, list_point->x, list_point->y);
     }
     while (list_point != NULL) {
       if (list_point->x < root->xc) {
         if (list_point->y < root->yc) {
-          node = rechercheCreeNoeudArbre(R, &root->so, root, list_point->x,
-                                         list_point->y);
+          node = rechercheCreeNoeudArbre(R, &root->so, root, list_point->x, list_point->y);
         } else {
-          node = rechercheCreeNoeudArbre(R, &root->no, root, list_point->x,
-                                         list_point->y);
+          node = rechercheCreeNoeudArbre(R, &root->no, root, list_point->x, list_point->y);
         }
       } else if (list_point->y < root->yc) {
-        node = rechercheCreeNoeudArbre(R, &root->se, root, list_point->x,
-                                       list_point->y);
+        node = rechercheCreeNoeudArbre(R, &root->se, root, list_point->x, list_point->y);
       } else {
-        node = rechercheCreeNoeudArbre(R, &root->ne, root, list_point->x,
-                                       list_point->y);
+        node = rechercheCreeNoeudArbre(R, &root->ne, root, list_point->x, list_point->y);
       }
       if (node_pre != NULL) {
         ajoute_voisins(node_pre, node);
@@ -210,6 +201,18 @@ Reseau* reconstitueReseauArbre(Chaines* C) {
     ajoute_commodites(R, node_first, node);
     list_chaine = list_chaine->suiv;
   }
+  liberer_arbre(root);
   return R;
+}
+
+void liberer_arbre(ArbreQuat* A){
+  if (A){
+    liberer_arbre(A->so);
+    liberer_arbre(A->se);
+    liberer_arbre(A->no);
+    liberer_arbre(A->ne);
+    free(A->noeud);
+    free(A);
+  }
 }
 

@@ -8,13 +8,15 @@ int main(void){
     Chaines *C = lectureChaines(f);
     fclose(f);
 
-    f = fopen("Chaine.txt","w");
+    f = fopen("chaine.res","w");
     ecrireChaines(C,f);
     fclose(f);
 
     afficheChainesSVG(C,"graph_chaine");
     printf("longueur totale = %.2f\n", longueurTotale(C));
     printf("nombre d'occurrence = %d\n", comptePointsTotal(C));
+    liberer_chaine(C);
+
     return 0;
 }
 

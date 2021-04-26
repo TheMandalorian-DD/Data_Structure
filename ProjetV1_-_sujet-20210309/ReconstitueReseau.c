@@ -11,9 +11,11 @@ int main(void) {
   fclose(f);
 
   Reseau *R = reconstitueReseauListe(C);
+  liberer_chaine(C);
   afficheReseauSVG(R, "graph_reseau");  
   f = fopen("reseau.res", "w");
   ecrireReseau(R,f);
+  liberer_reseau(R);
   fclose(f);
   return 0;
 }

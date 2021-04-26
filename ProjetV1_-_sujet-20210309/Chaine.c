@@ -120,3 +120,22 @@ int comptePointsTotal(Chaines *C){
     return n;
 }
 
+void liberer_point(CellPoint* points){
+    while(points) {
+		CellPoint *tmp=points->suiv;
+		free(points);
+		points=tmp;
+	} 
+}
+
+void liberer_chaine(Chaines* C){
+    CellChaine *chaine = C->chaines;
+    while(chaine){
+        CellChaine *tmp=chaine->suiv;
+        liberer_point(chaine->points);
+        free(chaine);
+        chaine=tmp;
+    }
+    free(C);
+}
+

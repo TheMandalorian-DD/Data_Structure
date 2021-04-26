@@ -11,6 +11,7 @@ int main(void) {
   fclose(f);
 
   Reseau *R = reconstitueReseauHash(C, 57);
+  liberer_chaine(C);
   afficheReseauSVG(R, "graph_hash");
 
   f = fopen("hash.res", "w");
