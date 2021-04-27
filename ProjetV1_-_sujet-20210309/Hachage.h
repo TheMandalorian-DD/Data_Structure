@@ -22,6 +22,8 @@ int functionClef(int x, int y);
 int functionHachage(int cle, int size);
 Reseau *reconstitueReseauHash(Chaines *C, int size);
 Noeud *rechercheCreeNoeudHachage(Reseau *R, TableHachage *H, double x, double y);
+void liberer_node(NodeHachage* n);
+void liberer_hash(TableHachage* hash);
 
 #endif
 

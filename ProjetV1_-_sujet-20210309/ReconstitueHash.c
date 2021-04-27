@@ -16,6 +16,7 @@ int main(void) {
 
   f = fopen("hash.res", "w");
   ecrireReseau(R, f);
+  liberer_reseau(R);
   fclose(f);
   return 0;
 }

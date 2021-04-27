@@ -35,45 +35,45 @@ Chaines* generationAleatoire(int nbChaines, int nbPointsChaine, int xmax, int ym
 
 int main(void) {
   Chaines* c;
-  FILE* f = fopen("time_list.txt", "w");
-  // FILE* f2 = fopen("time_hash.txt", "w");
+  //FILE* f = fopen("time_list.txt", "w");
+  FILE* f2 = fopen("time_hash_arbre.txt", "w");
   clock_t start, end;
   double during;
   for (int i = 500; i <= 5000; i += 500) {
     c = generationAleatoire(i, NB_Points_Chaine, X_MAX, Y_MAX);
 
+    // start = clock();
+    // reconstitueReseauListe(c);
+    // end = clock();
+    // during = (double)(end - start) / CLOCKS_PER_SEC;
+    // fprintf(f, "%d %f\n", i, during);
+
     start = clock();
-    reconstitueReseauListe(c);
+    reconstitueReseauHash(c, i * NB_Points_Chaine * 0.7);
     end = clock();
     during = (double)(end - start) / CLOCKS_PER_SEC;
-    fprintf(f, "%d %f\n", i, during);
+    fprintf(f2, "%d %f ", i, during);
 
-  //   start = clock();
-  //   reconstitueReseauHash(c, i * NB_Points_Chaine * 0.7);
-  //   end = clock();
-  //   during = (double)(end - start) / CLOCKS_PER_SEC;
-  //   fprintf(f2, "%d %f ", i, during);
+    start = clock();
+    reconstitueReseauHash(c, i * NB_Points_Chaine);
+    end = clock();
+    during = (double)(end - start) / CLOCKS_PER_SEC;
+    fprintf(f2, "%f ", during);
 
-  //   start = clock();
-  //   reconstitueReseauHash(c, i * NB_Points_Chaine);
-  //   end = clock();
-  //   during = (double)(end - start) / CLOCKS_PER_SEC;
-  //   fprintf(f2, "%f ", during);
+    start = clock();
+    reconstitueReseauHash(c, i * NB_Points_Chaine * 0.5);
+    end = clock();
+    during = (double)(end - start) / CLOCKS_PER_SEC;
+    fprintf(f2, "%f ", during);
 
-  //   start = clock();
-  //   reconstitueReseauHash(c, i * NB_Points_Chaine * 0.5);
-  //   end = clock();
-  //   during = (double)(end - start) / CLOCKS_PER_SEC;
-  //   fprintf(f2, "%f ", during);
-
-  //   start = clock();
-  //   reconstitueReseauArbre(c);
-  //   end = clock();
-  //   during = (double)(end - start) / CLOCKS_PER_SEC;
-  //   fprintf(f2, "%f\n", during);
+    start = clock();
+    reconstitueReseauArbre(c);
+    end = clock();
+    during = (double)(end - start) / CLOCKS_PER_SEC;
+    fprintf(f2, "%f\n", during);
   }
 
-  fclose(f);
+  fclose(f2);
   // fclose(f2);
 
   return 0;

@@ -211,7 +211,6 @@ void liberer_arbre(ArbreQuat* A){
     liberer_arbre(A->se);
     liberer_arbre(A->no);
     liberer_arbre(A->ne);
-    free(A->noeud);
     free(A);
   }
 }
