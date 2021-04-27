@@ -4,7 +4,10 @@ objectsChaine = ChaineMain.o SVGwriter.o Chaine.o
 objectsReseau = ReconstitueReseau.o Reseau.o SVGwriter.o Chaine.o
 objectsHash = ReconstitueHash.o Reseau.o SVGwriter.o Chaine.o Hachage.o
 objectsArbre = ReconstitueArbre.o Reseau.o SVGwriter.o Chaine.o ArbreQuat.o
+objectsTime = TimeTest.o Reseau.o SVGwriter.o Chaine.o Hachage.o ArbreQuat.o
 
+TimeTest : $(objectsTime)
+	$(CC) -o $@ $(CFLAGS) $(objectsTime)
 ReconstitueArbre : $(objectsArbre)
 	$(CC) -o $@ $(CFLAGS) $(objectsArbre)
 ReconstitueHash : $(objectsHash)
@@ -21,6 +24,7 @@ Hachage.o : Hachage.h Reseau.h
 ArbreQuat.o : ArbreQuat.h Reseau.h
 .PHONY : clean
 clean :
+	-rm TimeTest $(objectsTime)
 	-rm ReconstitueArbre $(objectsArbre)
 	-rm ReconstitueHash $(objectsHash)
 	-rm ReconstitueReseau $(objectsReseau)

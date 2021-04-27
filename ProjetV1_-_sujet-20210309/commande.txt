@@ -1,0 +1,4 @@
+plot "time_list.txt" using 1:2 title "list chaine" with lines
+set term postscript portrait
+set output "time_list.svg"
+set size 0.7, 0.7
