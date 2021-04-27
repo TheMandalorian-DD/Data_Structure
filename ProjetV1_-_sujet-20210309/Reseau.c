@@ -110,7 +110,7 @@ void afficheReseauSVG(Reseau *R, char* nomInstance){
     SVGwriter svg;
     double maxx=0,maxy=0,minx=1e6,miny=1e6;
 
-    courN=R->noeuds;
+    courN=R->noeuds; 
     while (courN!=NULL){
         if (maxx<courN->nd->x) maxx=courN->nd->x;
         if (maxy<courN->nd->y) maxy=courN->nd->y;
@@ -136,6 +136,14 @@ void afficheReseauSVG(Reseau *R, char* nomInstance){
 void liberer_noeud(CellNoeud* n){
   while(n){
     CellNoeud* tmp = n->suiv;
+    CellNoeud* voisins = n->nd->voisins;
+    while (voisins)
+    {
+      CellNoeud* next = voisins->suiv;
+      free(voisins);
+      voisins=next;
+    }
+    
     free(n->nd);
     free(n);
     n=tmp;
