@@ -10,19 +10,19 @@ int functionHachage(int cle, int size) {
   return (int)(size * ((double)cle * GOLDEN - (int)(cle * GOLDEN)));
 }
 
-int size_hash(Chaines* C, int m){
-  int size, val_max = 0;
-  for(CellChaine* chaine = C->chaines; chaine; chaine=chaine->suiv){
-    for(CellPoint* point = chaine->points; point; point=point->suiv){
-      if (point != NULL){
-        int hash = functionHachage(functionClef(point->x,point->y),m);
-        size = max(val_max,hash);
-        val_max=size;
-      }
-    }
-  }
-  return size;
-}
+// int size_hash(Chaines* C, int m){
+//   int size, val_max = 0;
+//   for(CellChaine* chaine = C->chaines; chaine; chaine=chaine->suiv){
+//     for(CellPoint* point = chaine->points; point; point=point->suiv){
+//       if (point != NULL){
+//         int hash = functionHachage(functionClef(point->x,point->y),m);
+//         size = max(val_max,hash);
+//         val_max=size;
+//       }
+//     }
+//   }
+//   return size;
+// }
 
 Noeud *rechercheCreeNoeudHachage(Reseau *R, TableHachage *H, double x, double y) {
   int clef = functionClef(x, y);

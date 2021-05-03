@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 #include "ArbreQuat.h"
 
 int main(void) {
@@ -12,7 +12,7 @@ int main(void) {
   Reseau *R = reconstitueReseauArbre(C);
   liberer_chaine(C);
   afficheReseauSVG(R, "graph_arbre");
-
+  system("open graph_arbre.html");
   f = fopen("arbre.res", "w");
   ecrireReseau(R, f);
   fclose(f);

@@ -25,6 +25,7 @@ typedef struct {
 } Chaines;
 
 Chaines* lectureChaines(FILE *f);
+int nbPoints(CellPoint* point);
 void ecrireChaines(Chaines *C, FILE *f);
 void afficheChainesSVG(Chaines *C, char* nomInstance);
 double longueurChaine(CellChaine* c);
