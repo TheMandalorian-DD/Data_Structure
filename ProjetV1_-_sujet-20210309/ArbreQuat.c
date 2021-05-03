@@ -1,6 +1,6 @@
 #include "ArbreQuat.h"
 
-#include <stdio.h>
+#include <stdio.h> 
 #include <string.h>
 #include <stdlib.h>
 
@@ -101,9 +101,9 @@ void insererNoeudArbre(Noeud* n, ArbreQuat** a, ArbreQuat* parent){
             insererNoeudArbre(n, &(*a)->no, *a);
         }
     } else if (n->y < (*a)->yc) {
-    insererNoeudArbre(n, &(*a)->se, *a);
+      insererNoeudArbre(n, &(*a)->se, *a);
     } else {
-        insererNoeudArbre(n, &(*a)->ne, *a);
+      insererNoeudArbre(n, &(*a)->ne, *a);
     }
 }
 

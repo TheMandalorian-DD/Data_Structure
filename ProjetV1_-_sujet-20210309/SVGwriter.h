@@ -53,3 +53,4 @@ void SVGline(SVGwriter *svg, double xa, double ya, double xb, double yb);
 void SVGfinalize(SVGwriter *svg);
 
 #endif
+

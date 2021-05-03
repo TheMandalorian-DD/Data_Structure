@@ -76,9 +76,11 @@ int nbLiaisons(Reseau *R){
     int nbL = 0;
     for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv){
         Noeud* n = cell_noeud -> nd;
-        for(CellNoeud* v = n -> voisins; v; v = v -> suiv) nbL++;
+        for(CellNoeud* v = n -> voisins; v; v = v -> suiv){
+          if (v->nd->num < cell_noeud->nd->num) nbL++;
+        }
     }
-    return nbL/2;
+    return nbL;
 }
 
 int nbCommodites(Reseau *R){ 
@@ -97,7 +99,7 @@ void ecrireReseau(Reseau *R, FILE *f){
     for(CellNoeud* cell_noeud = R -> noeuds; cell_noeud; cell_noeud = cell_noeud -> suiv){
       for(CellNoeud* v = cell_noeud -> nd -> voisins; v; v = v -> suiv){
         if (v -> nd -> num < cell_noeud -> nd -> num) fprintf(f,"l %d %d\n", v -> nd -> num, cell_noeud -> nd -> num);
-        }
+      }
     } 
     fprintf(f,"\n");
     for(CellCommodite* cell_com = R -> commodites; cell_com; cell_com = cell_com -> suiv) fprintf(f,"k %d %d\n", cell_com -> extrA -> num, cell_com -> extrB -> num);

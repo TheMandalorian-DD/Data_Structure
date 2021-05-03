@@ -1,5 +1,5 @@
 #ifndef __RESEAU_H__
-#define __RESEAU_H__
+#define __RESEAU_H__ 
 #include "Chaine.h" 
 
 

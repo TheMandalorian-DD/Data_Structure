@@ -1,5 +1,5 @@
 #include "Chaine.h"
-
+#include <stdlib.h>
 
 int main(void){
 
@@ -13,6 +13,7 @@ int main(void){
     fclose(f);
 
     afficheChainesSVG(C,"graph_chaine");
+    system("open graph_chaine.html");
     printf("longueur totale = %.2f\n", longueurTotale(C));
     printf("nombre d'occurrence = %d\n", comptePointsTotal(C));
     liberer_chaine(C);

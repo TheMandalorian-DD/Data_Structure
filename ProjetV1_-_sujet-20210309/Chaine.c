@@ -1,4 +1,3 @@
-
 #include "Chaine.h"
 
 #include <math.h>
@@ -22,7 +21,7 @@ Chaines* lectureChaines(FILE *f){
     
     int num, nP;
     double x, y;
-    CellChaine* L_cell = NULL; /* initialisation de la liste des cellules */
+    CellChaine* L_cell = NULL; /* initialisation de la liste des cellules */ 
 
     for(int i = 0; i < chaine -> nbChaines; i++){
         CellChaine* cell = malloc(sizeof(CellChaine));
