@@ -46,7 +46,7 @@ int main(int argc, char** argv)
     } else {
         if (chmeth == 2) {
             printf("Reconstruit Reseau avec Table de Hachage\n");
-            R = reconstitueReseauHash(C, 59);
+            R = reconstitueReseauHash(C, C->nbChaines*C->gamma*0.5);
         } else {
             if (chmeth == 3) {
                 printf("Reconstruit Reseau avec Arbre Quaternaire\n");
