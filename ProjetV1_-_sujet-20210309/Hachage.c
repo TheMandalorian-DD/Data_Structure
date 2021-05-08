@@ -2,30 +2,9 @@
 
 #include <stdlib.h>
 #include <string.h>
-#define max(a,b) (a>=b?a:b)
-
-int functionClef(int x, int y) { return y + (x + y) * (x + y + 1) / 2; }
-
-int functionHachage(int cle, int size) {
-  return (int)(size * ((double)cle * GOLDEN - (int)(cle * GOLDEN)));
-}
-
-// int size_hash(Chaines* C, int m){
-//   int size, val_max = 0;
-//   for(CellChaine* chaine = C->chaines; chaine; chaine=chaine->suiv){
-//     for(CellPoint* point = chaine->points; point; point=point->suiv){
-//       if (point != NULL){
-//         int hash = functionHachage(functionClef(point->x,point->y),m);
-//         size = max(val_max,hash);
-//         val_max=size;
-//       }
-//     }
-//   }
-//   return size;
-// }
 
 Noeud *rechercheCreeNoeudHachage(Reseau *R, TableHachage *H, double x, double y) {
-  int clef = functionClef(x, y);
+  long long clef = functionClef(x, y);
   int hash = functionHachage(clef, H->size);
   NodeHachage *node_list = H->nodes[hash];
   while (node_list != NULL) {

@@ -1,8 +1,13 @@
 #ifndef __HACHAGE_H__
 #define __HACHAGE_H__
 #include "Reseau.h"
+#include <math.h>
 
-#define GOLDEN 0.618
+#define functionClef(X, Y) Y + ((X + Y) * (X + Y + 1)/2 )
+
+#define GOLDEN ((sqrt(5) - 1) / 2.0)
+
+#define functionHachage(x, M) floor( (M) * ( (x * GOLDEN) - floor(x * GOLDEN) ) ) 
 
 typedef struct tableHachage TableHachage;
 typedef struct nodeHachage NodeHachage;
@@ -18,9 +23,7 @@ struct tableHachage {
   NodeHachage **nodes;
 };
 
-int functionClef(int x, int y);
-int functionHachage(int cle, int size);
-int size_hash(Chaines* C, int i);
+int size_hash(Chaines* C, int m);
 Reseau *reconstitueReseauHash(Chaines *C, int size);
 Noeud *rechercheCreeNoeudHachage(Reseau *R, TableHachage *H, double x, double y);
 void liberer_node(NodeHachage* n);

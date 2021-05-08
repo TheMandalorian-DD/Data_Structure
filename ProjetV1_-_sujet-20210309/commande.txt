@@ -1,4 +1,4 @@
-set title "Temps Hachage & Arbre"
+set title "Temps Hachage Arbre"
 set xlabel "Nombre de chaine"
 set ylabel "Temps (s)"
 plot "time_hash_arbre.txt" using 1:2 title "hash 0.7" with lines

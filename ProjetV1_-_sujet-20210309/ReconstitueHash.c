@@ -9,15 +9,7 @@ int main(void) {
   f = fopen("00014_burma.cha", "r");
   Chaines *C = lectureChaines(f);
   fclose(f);
-  int m = 57;
-  // for(int i = 0; i<100; i++){
-  //   printf("taille initiale = %d, taille réelle = %d\n",i,size_hash(C,i));
-  //   if (i-size_hash(C,i) > 1){
-  //     printf("La taille %d convient pour la table de Hachage\n",i);
-  //     m=i;
-  //     break;
-  //   }
-  // }
+  int m = C->nbChaines*C->gamma*0.5;
   Reseau *R = reconstitueReseauHash(C, m);
   liberer_chaine(C);
   afficheReseauSVG(R, "graph_hash");

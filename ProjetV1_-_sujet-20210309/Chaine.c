@@ -118,7 +118,7 @@ double longueurTotale(Chaines *C){
 int comptePointsTotal(Chaines *C){
     int n = 0;
     for(CellChaine* chaine = C -> chaines; chaine; chaine = chaine -> suiv){
-        for(CellPoint* point = chaine -> points; point; point = point -> suiv) n++;
+        n += nbPoints(chaine->points);
     }
     return n;
 }

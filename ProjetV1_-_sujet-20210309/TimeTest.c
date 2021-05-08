@@ -73,8 +73,8 @@ int main(void) {
     fprintf(f2, "%f\n", during);
   }
 
+  //fclose(f);
   fclose(f2);
-  // fclose(f2);
 
   return 0;
 }
