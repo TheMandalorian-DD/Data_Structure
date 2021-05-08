@@ -2,6 +2,9 @@
 #define __ARBRE_QUAT_H__
 #include "Reseau.h"
 
+#define max(a,b) (a>=b?a:b)
+#define min(a,b) (a<=b?a:b)
+
 /* Arbre quaternaire contenant les noeuds du reseau */
 typedef struct arbreQuat{
     double xc, yc;          /* Coordonnees du centre de la cellule */	
