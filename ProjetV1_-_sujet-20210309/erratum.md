@@ -9,7 +9,7 @@ Pour la SDD de table de hachage, nous avons décider de créer une sous-structur
 
 La fonction ```functionClef``` et ```functionHachage``` sont désormais des macros. La clef du point est maintenant récupérée dans une variable de type ```long long clef``` dans ```rechercheCreeNoeudHachage```.
 
-Pour la recherche des coordonnées minimales et maximales, nous utilisons deux macros ```max``` et ```min```.
+Pour la recherche des coordonnées minimales et maximales dans les arbres quaternaire, nous utilisons deux macros ```max``` et ```min```.
 
 Nous nous sommes permis de modifier la SDD du Graphe, dans la structure ```cellule_arete```, finalement elle pointe vers deux ```cellule_arete``` : ```usuiv``` et ```vsuiv```, pour avoir un tri plus précis et rapide.
 
