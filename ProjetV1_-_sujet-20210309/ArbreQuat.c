@@ -6,31 +6,32 @@
 
 void chaineCoordMinMax(Chaines* C, double *xmin, double *ymin, double *xmax, double *ymax){
   double val_xmin=0, val_ymin=0, val_xmax=0, val_ymax=0;
-  CellPoint *p = C->chaines->points;
-  if (p){
-    val_xmin = p->x;
-    val_xmax = p->x;
-    val_ymin = p->y;
-    val_ymax = p->y;
+  CellChaine *chaine = C->chaines;
+  if (chaine && chaine->points){
+    val_xmin = chaine->points->x;
+    val_xmax = chaine->points->x;
+    val_ymin = chaine->points->y;
+    val_ymax = chaine->points->y;
+  } else {
+    printf("Aucun point dans la chaîne !\n");
   }
   for(CellChaine* chaine = C -> chaines; chaine; chaine = chaine -> suiv){
-    if (chaine){
-      for(CellPoint* point = chaine -> points; point; point = point -> suiv){
-        if (point){
-          *xmin = min(val_xmin,point->x);
-          *ymin = min(val_ymin, point->y);
-          *xmax = max(val_xmax,point->x);
-          *ymax = max(val_ymax,point->y);
-          val_xmin = *xmin;
-          val_ymin = *ymin;
-          val_xmax = *xmax;
-          val_ymax = *ymax;
-        }
-      }
+    for(CellPoint* point = chaine -> points; point; point = point -> suiv){
+      *xmin = min(val_xmin,point->x);
+      *ymin = min(val_ymin, point->y);
+      *xmax = max(val_xmax,point->x);
+      *ymax = max(val_ymax,point->y);
+      val_xmin = *xmin;
+      val_ymin = *ymin;
+      val_xmax = *xmax;
+      val_ymax = *ymax;
+        
     }
   }
-  printf("xmin = %f, ymin = %f, xmax = %f, ymax = %f\n",*xmin,*ymin,*xmax,*ymax);
+  printf("xmin = %.2f, ymin = %.2f, xmax = %.2f, ymax = %.2f\n",*xmin,*ymin,*xmax,*ymax);
 }
+  
+
 
 ArbreQuat* creerArbreQuat(double xc, double yc, double coteX, double coteY){
     ArbreQuat* a = malloc(sizeof(ArbreQuat));

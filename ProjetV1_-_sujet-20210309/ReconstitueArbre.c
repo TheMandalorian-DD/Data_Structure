@@ -8,7 +8,6 @@ int main(void) {
   f = fopen("00014_burma.cha", "r");
   Chaines *C = lectureChaines(f);
   fclose(f);
-
   Reseau *R = reconstitueReseauArbre(C);
   liberer_chaine(C);
   afficheReseauSVG(R, "graph_arbre");
@@ -17,6 +16,5 @@ int main(void) {
   ecrireReseau(R, f);
   fclose(f);
   return 0;
-
 }
 

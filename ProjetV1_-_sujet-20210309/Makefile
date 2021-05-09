@@ -29,7 +29,7 @@ ArbreQuat.o : ArbreQuat.h Reseau.h
 Graphe.o : Graphe.h Struct_File.h Struct_Liste.h
 .PHONY : clean
 clean :	
-	-rm ReorganiseReseau $(objectsGraphe)
+	-rm ReorganiseReseau $(objects) $(objectsGraphe)
 	-rm TimeTest $(objectsTime)
 	-rm ReconstitueArbre $(objectsArbre)
 	-rm ReconstitueHash $(objectsHash)
