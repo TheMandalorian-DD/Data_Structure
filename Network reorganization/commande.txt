@@ -1,0 +1,8 @@
+set title "Temps Hachage Arbre"
+set xlabel "Nombre de chaine"
+set ylabel "Temps (s)"
+plot "time_hash_arbre.txt" using 1:2 title "hash 0.7" with lines
+replot "time_hash_arbre.txt" using 1:3 title "hash" with lines
+replot "time_hash_arbre.txt" using 1:4 title "hash 0.5" with lines
+replot "time_hash_arbre.txt" using 1:5 title "arbre" with lines
+
